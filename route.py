@@ -6,14 +6,12 @@ Created on Sun Mar 06 19:05:28 2016
 """
 
 import numpy as np
-import sympy as sp
 
 from flask import Flask, render_template
 
 from bokeh.plotting import figure, show, gridplot, output_file
 from bokeh.models import ColumnDataSource, HBox, VBoxForm, CustomJS
 from bokeh.models.widgets import Slider
-from bokeh.io import curdoc
 from bokeh.embed import components
 
 #Static Amplitude 
@@ -33,7 +31,7 @@ TOOLS = 'box_select, crosshair, help, reset, resize'
 def make_figure():
     #set up plot
     plot = figure(plot_height=400, plot_width=400, title="Sine Wave",
-                  tools=TOOLS, x_range=[0,4*np.pi], y_range=[-2,2])
+                  tools=TOOLS, x_range=[0,4*np.pi], y_range=[-5,5])
                   
     plot.line('x','y', source=source, line_width=3)
     plot.scatter('x','y', source=source,size=5)
@@ -56,7 +54,7 @@ def make_figure():
     #plot
     layout = VBoxForm(amplitude,plot)
     show(layout)
-    return layout
+    return plot #need to return the layout
         
 # Calling plotting Function
 p = make_figure()
