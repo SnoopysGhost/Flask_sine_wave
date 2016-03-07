@@ -10,8 +10,9 @@ import numpy as np
 from flask import Flask, render_template
 
 from bokeh.plotting import figure, show, gridplot, output_file
-from bokeh.models import ColumnDataSource, HBox, VBoxForm, CustomJS
+from bokeh.models import ColumnDataSource, CustomJS, VBoxForm
 from bokeh.models.widgets import Slider
+#from bokeh.io import vform
 from bokeh.embed import components
 
 #Static Amplitude 
@@ -49,12 +50,12 @@ def make_figure():
                     """)
 
     #add slider
-    amplitude = Slider(title="Amplitude",value=amp, start=0, end=5, callback=callback)
+    amplitude = Slider(title="Amplitude", value=amp, start=0, end=5, callback=callback)
 
     #plot
     layout = VBoxForm(amplitude,plot)
     show(layout)
-    return plot #need to return the layout
+    return layout #need to return the layout
         
 # Calling plotting Function
 p = make_figure()
